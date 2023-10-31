@@ -1,0 +1,65 @@
+{% extends 'groceries_app/base_template.html' %}
+
+{% block content %}
+<div class="recipe-title-container">
+    <h1>Recipe Name: {{ recipe.recipe_name }}</h1>
+</div>
+
+<div class="ingredients-container">
+    <p><strong>Ingredients:</strong> </p>
+    {% if recipe.recipe_ingredients.all %}
+        <ul class="ingredients-list">
+            {% for ingredient in recipe.recipe_ingredients.all %}
+                <li class="ingredient-row">
+                    <div class="ingredient-details">
+                        {{ ingredient.item_name }}
+                        <span class="ingredient-cost">Cost: ${{ ingredient.cost }}</span>
+                    </div>
+                    <a class="nav-link btn btn-primary" href="{{ ingredient.get_absolute_url }}">Details</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>There are no Ingredients to view.</p>
+    {% endif %}
+</div>
+
+<style>
+.recipe-title-container {
+    background-color: #81BA5F;
+    color: #edf7f6;
+    padding: 10px;
+}
+
+.ingredients-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.ingredients-list {
+    list-style: none;
+    padding: 0;
+}
+
+.ingredient-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.ingredient-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.ingredient-cost {
+    color: #888; /* Add a color for cost */
+}
+
+
+/* Add other styling as needed */
+</style>
+{% endblock %}

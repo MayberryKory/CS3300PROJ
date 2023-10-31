@@ -1,0 +1,61 @@
+{% extends 'groceries_app/base_template.html' %}
+
+{% block content %}
+<div class="ingredient-title-container">
+    <h1>Grocery Items</h1>
+</div>
+
+<div class="ingredient-grid">
+  <ul>
+    <li class="ingredient-header">
+      <div class="ingredient-field">Item Name</div>
+      <div class="ingredient-field">Cost</div>
+      <div class="ingredient-field">SKU</div>
+      <div class="ingredient-field">View Details</div>
+    </li>
+    {% for ingredient in grocery_item_list %}
+      <li class="ingredient-item">
+         <div class="ingredient-field">{{ ingredient.item_name }}</div>
+         <div class="ingredient-field">{{ ingredient.cost }}</div>
+         <div class="ingredient-field">{{ ingredient.sku }}</div>
+         <div class="ingredient-field"><a href="{{ingredient.get_absolute_url}}" class="btn btn-primary">View Item</a> </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<style>
+.ingredient-title-container {
+    background-color: #81BA5F;
+    color: #edf7f6;
+    padding: 10px;
+}
+
+.ingredient-grid {
+    gap: 20px;
+}
+
+.ingredient-header {
+    display: grid;
+    color: #edf7f6;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    background-color: #59A340;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.ingredient-item {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    background-color: #edf7f6;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.ingredient-field {
+    border-right: 0px solid #ccc;
+    padding: 10px;
+}
+</style>
+{% endblock %}
