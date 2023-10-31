@@ -1,4 +1,16 @@
 {% extends "groceries_app/base_template.html" %}
-{% block content%}
-<h1> This is my app</h1>
+
+
+{% block title %}Welcome to Shop Nest{% endblock %}
+
+{% block content %}
+<div class="welcome-container" style="background-color: #edf7f6; color: #a28089;">
+    <h1 class="display-4" style="color: #a28089;">Welcome to <span class="text-primary">Shop Nest</span></h1>
+    <p class="lead">Your Ultimate Grocery Shopping Companion</p>
+    <p class="font-nunito">
+        Shop Nest is here to simplify your grocery shopping experience. Create and manage shopping lists, discover the best deals, and track your expenses with ease. Say goodbye to the hassle of grocery shopping and let Shop Nest make it a breeze.
+    </p>
+    <a href="/get-started" class="btn btn-primary btn-lg btn-start">Get Started</a>
+</div>
 {% endblock %}
+

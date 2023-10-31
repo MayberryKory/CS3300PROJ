@@ -1,8 +1,8 @@
 from django.views import generic
 from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
-from models import *
-from forms import *
+from .models import *
+from .forms import *
 
 # Create your views here.
 def index(request):

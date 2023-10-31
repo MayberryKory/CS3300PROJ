@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
   <head>
     <title>Grocery Aggregator Application</title>
@@ -6,34 +7,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+    <style>
+      /* Custom CSS for the navbar */
+      .navbar {
+        background-color: #9df9ef; /* Change the background color */
+      }
+
+      .navbar-brand img {
+        max-height: 150px; /* Increase the max height to make the logo larger */
+        float: right; /* Align the logo to the left */
+        
+      }
+
+      .navbar-nav .nav-item {
+        margin-right: 10px; /* Add some margin between items */
+      }
+
+      .navbar-nav .nav-link {
+        color: #a28089; /* Change the text color */
+        font-weight: bold; /* Make the text bold */
+        font-family: 'Nunito Sans', sans-serif ;
+        font-size: 28px; /* Increase the font size */
+      }
+
+      .navbar-nav .nav-link:hover {
+        color: #a20889; /* Change the text color on hover */
+      }
+    </style>
   </head>
 
   <body>
     <div class="container-fluid">
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                <a class="nav-link btn btn-primary" aria-current="page" href="{% url 'index' %}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Menu 1</a>
+                <a class="nav-link btn btn-primary" href="#">Menu 1</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Menu 2</a>
+                <a class="nav-link btn btn-primary" href="#">Menu 2</a>
               </li>
             </ul>
           </div>
+          <a class="navbar-brand" href="#">
+            <img src="{% static 'images/Logo.png' %}" alt="Logo" />
+          </a>
         </div>
       </nav>
 
-      <!-- add block content from html template -->
+      <!-- add block content from HTML template -->
       {% block content %}
-
       {% endblock %}
     </div>
   </body>
