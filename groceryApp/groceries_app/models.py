@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
+
 class GroceryItem(models.Model):
     item_name = models.CharField(max_length=200)
     sku = models.CharField(max_length=200)
@@ -15,7 +16,7 @@ class GroceryItem(models.Model):
 
 class Recipe(models.Model):
     recipe_name = models.CharField(max_length=200)
-    recipe_ingredients = models.ManyToManyField(GroceryItem)  
+    recipe_ingredients = models.ManyToManyField(GroceryItem, related_name='recipes')  
 
     def __str__(self):
         return self.recipe_name

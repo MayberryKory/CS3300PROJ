@@ -4,16 +4,19 @@ from django.http import HttpResponse
 from .models import *
 from .forms import *
 
+
+
 # Create your views here.
 def index(request):
     return render(request, 'groceries_app/index.html')
 
 class GroceryItemListView(generic.ListView):
     model = GroceryItem
+    context_object_name = "grocery_item_list"
 
 class GroceryItemDetailView(generic.DetailView):
     model = GroceryItem
-
+    context_object_name ="grocery_item"
 class RecipeView(generic.ListView):
     model = Recipe
 
@@ -21,8 +24,7 @@ class RecipeDetailView(generic.DetailView):
     model = Recipe
 
     def get_context_data(self, **kwargs):
-        context = True
-        # Make this do something
+        context = super().get_context_data(**kwargs)
         return context
 
 class RecipeListListView(generic.ListView):
@@ -30,3 +32,49 @@ class RecipeListListView(generic.ListView):
 
 class RecipeListDetailView(generic.DetailView):
     model = RecipeList
+
+def createRecipe(request):
+    form = RecipeForm()
+    
+    if request.method == 'POST':
+        # Create a new dictionary with form data and portfolio_id
+        project_data = request.POST.copy()
+        
+        form = RecipeForm(project_data)
+        if form.is_valid():
+            recipe = form.save(commit=True)
+        
+            # Redirect back to the portfolio detail page
+            return redirect('recipe-detail', pk=recipe.id)
+
+    context = {'form': form}
+    return render(request, 'groceries_app/recipe_form.html', context)
+
+def deleteRecipe(request, recipe_id):
+    
+    recipe = Recipe.objects.get(pk=recipe_id)
+
+    if request.method == 'POST':
+        # Delete the project
+        recipe.delete()
+        return redirect('recipes')
+
+    return render(request, 'groceries_app/project_delete.html', {'recipe': recipe})
+
+def updateRecipe(request, recipe_id):
+    # Retrieve the existing recipe
+    recipe = Recipe.objects.get(pk=recipe_id)
+
+    if request.method == 'POST':
+        # If the request method is POST, process the form data
+        form = RecipeForm(request.POST, instance=recipe)
+        if form.is_valid():
+            form.save()
+            return redirect('recipe-detail', recipe_id)  # Redirect to the recipe detail page
+
+    else:
+        # If the request method is GET, display the form with the existing data
+        form = RecipeForm(instance=recipe)
+
+    return render(request, 'groceries_app/recipe_form.html', {'form': form, 'recipe': recipe})
+

@@ -1,16 +1,87 @@
 {% extends "groceries_app/base_template.html" %}
-
+{%load static%}
+{% load bootstrap5 %}
 
 {% block title %}Welcome to Shop Nest{% endblock %}
 
 {% block content %}
-<div class="welcome-container" style="background-color: #edf7f6; color: #a28089;">
-    <h1 class="display-4" style="color: #a28089;">Welcome to <span class="text-primary">Shop Nest</span></h1>
-    <p class="lead">Your Ultimate Grocery Shopping Companion</p>
-    <p class="font-nunito">
-        Shop Nest is here to simplify your grocery shopping experience. Create and manage shopping lists, discover the best deals, and track your expenses with ease. Say goodbye to the hassle of grocery shopping and let Shop Nest make it a breeze.
-    </p>
-    <a href="/get-started" class="btn btn-primary btn-lg btn-start">Get Started</a>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .feature-section {
+            min-height: calc(100vh - 100px);
+            padding: 20px 0;
+        }
 
+        .top-container {
+            background-color: rgba(129, 186, 95, 0.6); /* 70% opacity */
+        }
+        .best-sale-container {
+            background-color: rgba(255, 183, 26, 0.7); /* 70% opacity */
+        }
+        .feature-section {
+            background-color: rgba(129, 186, 95, 0.6); /* 70% opacity */
+        }
+        .feature-panel {
+            border: 2px outset #010101; /* This sets a 1px black border around each panel */
+            padding: 20px;
+            background-color: rgba(255, 183, 26, 0.7); 
+        }
+
+         
+    </style>
+</head>
+<body>
+    <div class="top-container" style="color: #6E168A; padding: 15px;">
+        <h1 class="display-4" style="color: #6E168A; text-align: center;">Welcome to <span style="color: #324A62">Shop Nest</span></h1>
+        <p class="lead">Your Ultimate Grocery Shopping Companion</p>
+        <p class="font-nunito">
+            Shop Nest is here to simplify your grocery shopping experience. Create and manage shopping lists, discover the best deals, and track your expenses with ease. Say goodbye to the hassle of grocery shopping and let Shop Nest make it a breeze.
+        </p>
+        <a href="/get-started" class="btn btn-primary btn-lg btn-start" style="display: block; margin: 0 auto;">Get Started</a>
+    </div>
+
+    <div class="best-sale-container" style="color: #6E168A; padding: 15px; text-align: center; border-radius: 10px;">
+        <h2 style="font-size: 24px; margin-bottom: 10px;">Best Sale Items</h2>
+        <p style="font-size: 16px;">Discover our latest deals and best sale items. Stay tuned for exciting offers!</p>
+    </div>
+
+    <div class="feature-section" style="padding: 10px;">
+        <div class="container">
+            <div class="row justify-content-between">
+                <!-- Panel 1: Shop for the Best Prices -->
+                <div class="col-md-4 mb-4">
+                    <div class="feature-panel text-center">
+                        <img src="{% static 'images/basket.jpg' %}" alt="Shop for the Best Prices" style="max-width: 100%;" />
+                        <h3>Shop for the Best Prices</h3>
+                        <p>Compare prices across multiple stores and find the best deals on groceries.</p>
+                    </div>
+                </div>
+                <!-- Panel 2: Build Recipes -->
+                <div class="col-md-4 mb-4">
+                    <div class="feature-panel text-center">
+                        <img src="{% static 'images/recipe.jpg' %}" alt="Build Recipes" style="max-width: 100%; max-height: 60%;" />
+                        <h3>Build Recipes</h3>
+                        <p>Create and customize your recipes with our easy-to-use recipe builder.</p>
+                    </div>
+                </div>
+                <!-- Panel 3: Create Recipe Lists -->
+                <div class="col-md-4 mb-4">
+                    <div class="feature-panel text-center">
+                        <img src="{% static 'images/chef.jpg' %}" alt="Create Recipe Lists" style="max-width: 100%;" />
+                        <h3>Create Recipe Lists</h3>
+                        <p>Organize your recipes into lists for easy access and shopping.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+</body>
+</html>
+
+{% endblock %}

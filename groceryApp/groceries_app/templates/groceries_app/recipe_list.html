@@ -1,0 +1,66 @@
+{% extends 'groceries_app/base_template.html' %}
+
+{% block content %}
+<div class="recipe-title-container">
+    <h1>Recipe List</h1>
+</div>
+
+{% if recipe_list %}
+    <table class="recipe-table">
+        <thead>
+            <tr>
+                <th>Recipe Name</th>
+                <th>Other Header 1</th>
+                <th>Other Header 2</th>
+                <!-- Add more headers as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for recipe in recipe_list %}
+                <tr>
+                    <td>
+                        <a href="{{ recipe.get_absolute_url }}">{{ recipe.recipe_name }}</a>
+                    </td>
+                    <td>{{ recipe.other_field_1 }}</td>
+                    <td>{{ recipe.other_field_2 }}</td>
+                    <!-- Add more data fields as needed -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="new-recipe-button-container">
+        <a href="{% url 'create-recipe' %}" class="btn btn-primary">Create New Recipe</a>
+    </div>
+{% else %}
+    <p>There are no recipes to view.</p>
+{% endif %}
+</div>
+
+<style>
+.recipe-title-container {
+    background-color: #81BA5F; 
+    color: #edf7f6;
+    padding: 10px;
+}
+
+.recipe-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.recipe-table th, .recipe-table td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: left;
+}
+
+.recipe-table th {
+    background-color: #59A340; 
+    color: #edf7f6;  
+}
+
+
+</style>
+{% endblock %}
