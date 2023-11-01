@@ -5,16 +5,14 @@
 <!-- Replace block content in base_template.html -->
 {% block content %}
 
-
-<form action="" method="POST">
-
-
-{% csrf_token %}
-<table>
-{{ form.as_table }}
-</table>
-<input type="submit" name="Submit">
-</form>
-
+<body>
+    <h1>Add Recipe</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Renders the form fields as paragraphs -->
+        <input type="submit" value="Save Recipe">
+    </form>
+</body>
 
 {% endblock %}
+

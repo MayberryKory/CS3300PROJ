@@ -24,6 +24,13 @@
     {% endif %}
 </div>
 
+<div class="delete-button-container">
+    <form method="post" action="{% url 'delete_recipe' recipe.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete Recipe</button>
+    </form>
+</div>
+
 <style>
 .recipe-title-container {
     background-color: #81BA5F;

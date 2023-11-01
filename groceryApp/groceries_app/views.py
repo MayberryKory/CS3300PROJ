@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from .models import *
 from .forms import *
 
+
+
 # Create your views here.
 def index(request):
     return render(request, 'groceries_app/index.html')
@@ -40,13 +42,23 @@ def createRecipe(request):
         
         form = RecipeForm(project_data)
         if form.is_valid():
-            # Save the form without committing to the database
-            project = form.save(commit=False)
-            # Set the portfolio relationship
-            project.save()
-
+            recipe = form.save(commit=True)
+        
             # Redirect back to the portfolio detail page
-            return redirect('recipe-detail', pk=project.id)
+            return redirect('recipe-detail', pk=recipe.id)
 
     context = {'form': form}
     return render(request, 'groceries_app/recipe_form.html', context)
+
+def deleteRecipe(request, recipe_id):
+    
+    recipe = Recipe.objects.get(pk=recipe_id)
+
+    if request.method == 'POST':
+        # Delete the project
+        recipe.delete()
+        return redirect('recipes')
+
+    return render(request, 'portfolio_app/project_delete.html', {'recipe': recipe})
+
+
