@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
+
 class GroceryItem(models.Model):
     item_name = models.CharField(max_length=200)
     sku = models.CharField(max_length=200)

@@ -24,8 +24,10 @@
     {% endif %}
 </div>
 
+<a class="btn btn-success" href="{% url 'update-recipe' recipe.id %}">Update Recipe</a>
+    <form method="post" action="{% url 'delete-recipe' recipe.id %}">
 <div class="delete-button-container">
-    <form method="post" action="{% url 'delete_recipe' recipe.id %}">
+    <form method="post" action="{% url 'delete-recipe' recipe.id %}">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Delete Recipe</button>
     </form>

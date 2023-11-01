@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-h(!j5q564tdl*_htsxg!7s2k2yc)lmrt+^9@q^x)h2^96jy(uq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'groceries_app',
+    'bootstrap5',
     
 ]
 
@@ -61,7 +62,7 @@ ROOT_URLCONF = 'django_grocery_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'groceries_app/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -135,3 +136,9 @@ MEDIA_URL = '/images/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+BOOTSTRAP5 = {
+    'theme_url': 'https://cdn.jsdelivr.net/npm/bootstrap@5.5.3/dist/css/bootstrap.min.css',
+    'javascript_url': 'https://cdn.jsdelivr.net/npm/bootstrap@5.5.3/dist/js/bootstrap.bundle.min.js',
+}

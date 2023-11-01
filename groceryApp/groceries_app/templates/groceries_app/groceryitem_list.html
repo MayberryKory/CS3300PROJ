@@ -1,5 +1,7 @@
 {% extends 'groceries_app/base_template.html' %}
 
+{% block title %}Grocery Items - Shop Nest{% endblock %}
+
 {% block content %}
 <div class="ingredient-title-container">
     <h1>Grocery Items</h1>
@@ -16,18 +18,19 @@
     {% for ingredient in grocery_item_list %}
       <li class="ingredient-item">
          <div class="ingredient-field">{{ ingredient.item_name }}</div>
-         <div class="ingredient-field">{{ ingredient.cost }}</div>
-         <div class="ingredient-field">{{ ingredient.sku }}</div>
-         <div class="ingredient-field"><a href="{{ingredient.get_absolute_url}}" class="btn btn-primary">View Item</a> </div>
+         <div class="ingredient-field">${{ ingredient.cost }}</div>
+         <div class "ingredient-field">{{ ingredient.sku }}</div>
+         <div class="ingredient-field"><a href="{{ ingredient.get_absolute_url }}" class="btn btn-primary">View Item</a></div>
       </li>
     {% endfor %}
   </ul>
 </div>
+</div>
 
 <style>
 .ingredient-title-container {
-    background-color: #81BA5F;
-    color: #edf7f6;
+    background-color: rgba(129, 186, 95, 0.6);
+    color: #6E168A;
     padding: 10px;
 }
 
@@ -37,24 +40,24 @@
 
 .ingredient-header {
     display: grid;
-    color: #edf7f6;
+    color: #6E168A;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    background-color: #59A340;
+    background-color: rgba(255, 183, 26, 0.7);
     font-weight: bold;
     text-align: center;
-    border: 1px solid #ccc;
+    border: 1px solid #010101;
 }
 
 .ingredient-item {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    background-color: #edf7f6;
-    border: 1px solid #ccc;
+    background-color: rgba(255, 183, 26, 0.7);
+    border: 1px outset #010101;
     text-align: center;
 }
 
 .ingredient-field {
-    border-right: 0px solid #ccc;
+    border-right: 1px outset #010101;
     padding: 10px;
 }
 </style>

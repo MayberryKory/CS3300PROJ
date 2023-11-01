@@ -1,30 +1,13 @@
 {% extends 'groceries_app/base_template.html' %}
 
 {% block content %}
-<div class="ingredient-title-container">
+<div class="ingredient-title-container" style="background-color: rgba(129, 186, 95, 0.6); padding: 10px; color: #6E168A;">
     <h1>Item Details</h1>
 </div>
 
-<div class="ingredient-detail">
+<div class="ingredient-detail" style="border: 1px solid #010101; background-color: rgba(129, 186, 95, 0.6); padding: 20px; margin: 20px; color: #6E168A;">
     <h2>{{ grocery_item.item_name }}</h2>
     <p><strong>Cost:</strong> {{ grocery_item.cost }}</p>
     <p><strong>SKU:</strong> {{ grocery_item.sku }}</p>
 </div>
-
-<style>
-.ingredient-title-container {
-    background-color: #81BA5F;
-    padding: 10px;
-    color:#edf7f6
-}
-
-.ingredient-detail {
-    border: 1px solid #ccc;
-    background-color: #edf7f6;
-    padding: 20px;
-    margin: 20px;
-}
-
-/* Add other styling as needed */
-</style>
 {% endblock %}

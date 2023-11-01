@@ -27,7 +27,7 @@ class RecipeForm(ModelForm):
 
         # If you want to prepopulate the form with selected items, you can do so here
         if self.instance.pk:
-            self.fields['grocery_items'].initial = self.instance.groceryitem_set.all()
+            self.fields['grocery_items'].initial = self.instance.recipe_ingredients.all()
 
     def save(self, commit=True):
         recipe = super(RecipeForm, self).save(commit=False)

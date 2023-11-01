@@ -59,6 +59,22 @@ def deleteRecipe(request, recipe_id):
         recipe.delete()
         return redirect('recipes')
 
-    return render(request, 'portfolio_app/project_delete.html', {'recipe': recipe})
+    return render(request, 'groceries_app/project_delete.html', {'recipe': recipe})
 
+def updateRecipe(request, recipe_id):
+    # Retrieve the existing recipe
+    recipe = Recipe.objects.get(pk=recipe_id)
+
+    if request.method == 'POST':
+        # If the request method is POST, process the form data
+        form = RecipeForm(request.POST, instance=recipe)
+        if form.is_valid():
+            form.save()
+            return redirect('recipe-detail', recipe_id)  # Redirect to the recipe detail page
+
+    else:
+        # If the request method is GET, display the form with the existing data
+        form = RecipeForm(instance=recipe)
+
+    return render(request, 'groceries_app/recipe_form.html', {'form': form, 'recipe': recipe})
 

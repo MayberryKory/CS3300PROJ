@@ -1,18 +1,19 @@
 <!-- inherit from base.html -->
 {% extends 'groceries_app/base_template.html' %}
 
-
 <!-- Replace block content in base_template.html -->
 {% block content %}
-
 <body>
-    <h1>Add Recipe</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}  <!-- Renders the form fields as paragraphs -->
-        <input type="submit" value="Save Recipe">
-    </form>
+    <div style="padding: 20px; background-color: rgba(255, 183, 26, 0.7); text-align: center;">
+        <h1 style="color: #6E168A;">Add Recipe</h1>
+        <form method="post">
+            {% csrf_token %}
+            
+            <!-- Apply styles to the form fields -->
+            {{ form.as_p }}
+            
+            <input type="submit" value="Save Recipe" class="btn btn-primary" style="margin: 10px auto;">
+        </form>
+    </div>
 </body>
-
 {% endblock %}
-
