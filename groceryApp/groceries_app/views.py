@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
 from .models import *
 from .forms import *
+from .api_client import KrogerClient
 
 
 
@@ -77,4 +78,40 @@ def updateRecipe(request, recipe_id):
         form = RecipeForm(instance=recipe)
 
     return render(request, 'groceries_app/recipe_form.html', {'form': form, 'recipe': recipe})
+
+def grocery_items(request):
+    client_id = "shopnest-c3f6a3ac62a8ec4c7a93f6c9aa42d1658272743587919993717"
+    client_secret = "4yBG7MpD4bYi1imSjMkZQo-I9xsyTSStSlySV4Df"
+    # Initialize the Kroger API client with your client credentials
+    kroger_client = KrogerClient(client_id, client_secret)
+
+    # Replace with the product ID and location ID you want to retrieve
+    product_id = '0002100065883'
+    # location_id = 'null'
+
+    # Fetch data from Kroger's API using the client
+    data = kroger_client.search_products(product_id=product_id)
+
+    # Extract the data you need from the Kroger API response
+    if data:
+        kroger_item = data[0]  # Assuming the first result is the desired product
+
+        # Map the data to your GroceryItem model
+        grocery_item = GroceryItem(
+            item_name=kroger_item.brand + ' ' + kroger_item.description,
+            sku=kroger_item.upc,
+            cost=kroger_item.price
+        )
+
+        # Save the GroceryItem object to your database
+        grocery_item.save()
+
+    # Retrieve all GroceryItem objects from the database
+    grocery_item_list = GroceryItem.objects.all()
+
+    context = {
+        'grocery_item_list': grocery_item_list,
+    }
+    return render(request, 'groceries_app/groceryitem_list.html', context)
+
 
