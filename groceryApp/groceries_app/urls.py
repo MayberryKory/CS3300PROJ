@@ -4,7 +4,7 @@ from groceries_app import views
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('groceryItems/', views.GroceryItemListView.as_view(), name= 'grocery-items'),
+    path('groceryItems/', views.grocery_items, name= 'grocery-items'),
     path('groceryItems/<int:pk>', views.GroceryItemDetailView.as_view(), name='item-detail'),
     path('recipes/', views.RecipeView.as_view(), name= 'recipes'),
     path('recipes/<int:pk>/', views.RecipeDetailView.as_view(), name='recipe-detail'),
@@ -18,5 +18,6 @@ urlpatterns = [
     path('accounts/register/', views.register, name='register'), 
     path('accounts/profile/', views.profile_view, name = 'profile')
 
+    
 
 ]

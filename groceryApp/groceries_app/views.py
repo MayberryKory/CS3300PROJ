@@ -9,6 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout as auth_logout
 from django.contrib import messages
 from django.urls import reverse_lazy
+from .api_client import KrogerClient
 
 
 
@@ -116,7 +117,4 @@ def updateRecipe(request, recipe_id):
         form = RecipeForm(instance=recipe)
 
     return render(request, 'groceries_app/recipe_form.html', {'form': form, 'recipe': recipe})
-
-
-
 
