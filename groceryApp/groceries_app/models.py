@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 class GroceryItem(models.Model):
@@ -16,7 +17,9 @@ class GroceryItem(models.Model):
 
 class Recipe(models.Model):
     recipe_name = models.CharField(max_length=200)
-    recipe_ingredients = models.ManyToManyField(GroceryItem, related_name='recipes')  
+    recipe_ingredients = models.ManyToManyField(GroceryItem, related_name='recipes')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    date_modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.recipe_name

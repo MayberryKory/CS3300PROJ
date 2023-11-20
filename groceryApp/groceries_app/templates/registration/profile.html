@@ -1,0 +1,17 @@
+<!-- profile.html -->
+<!DOCTYPE html>
+{% extends "groceries_app/base_template.html" %}
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+<div class="top-container" style="color: #6E168A; padding: 15px;">
+    <h1 class="display-4" style="color: #6E168A; text-align: center;">User Profile</h1>
+    <p class="lead">Username: {{ user.username }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Date Joined: {{ user.date_joined }}</p>
+    <p>Last Login: {{ user.last_login }}</p>
+    <!-- Display other custom fields or attributes you've added to the User model -->
+</div>
+<!-- Apply the same styling for other sections or elements as needed -->
+{% endblock %}
+

@@ -1,0 +1,23 @@
+<!-- groceries_app/templates/registration/logout.html -->
+{% extends "groceries_app/base_template.html" %}
+{% block title %}Logout - Shop Nest{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5">
+                <div class="card-header">
+                    <h3 class="text-center">Logged Out</h3>
+                </div>
+                <div class="card-body">
+                    <p class="text-center">You have been successfully logged out of Shop Nest.</p>
+                    <p class="text-center">
+                        <a href="{% url 'login' %}" class="btn btn-primary">Login Again</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

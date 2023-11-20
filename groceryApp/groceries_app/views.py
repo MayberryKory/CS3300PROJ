@@ -1,8 +1,12 @@
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
 from .models import *
 from .forms import *
+from django.contrib.auth import views as auth_views
+from django.contrib.auth import logout as auth_logout
+from django.urls import reverse_lazy
 
 
 
@@ -33,6 +37,33 @@ class RecipeListListView(generic.ListView):
 class RecipeListDetailView(generic.DetailView):
     model = RecipeList
 
+# Login view
+class LoginView(auth_views.LoginView):
+    template_name = 'login.html'
+    success_url = reverse_lazy('index')
+
+# Logout
+def logut(request):
+    auth_logout(request)
+    return redirect('index')
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # Redirect to a success page or login page
+            return redirect('login')
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'registration/register.html', {'form': form})
+
+@login_required
+def profile_view(request):
+    user_profile = request.user  # Accessing the current logged-in user
+    return render(request, 'registration/profile.html', {'user_profile': user_profile})
+
+@login_required
 def createRecipe(request):
     form = RecipeForm()
     
@@ -42,7 +73,9 @@ def createRecipe(request):
         
         form = RecipeForm(project_data)
         if form.is_valid():
-            recipe = form.save(commit=True)
+            recipe = form.save(commit=False)
+            recipe.creator = request.user
+            recipe.save()
         
             # Redirect back to the portfolio detail page
             return redirect('recipe-detail', pk=recipe.id)
@@ -77,4 +110,7 @@ def updateRecipe(request, recipe_id):
         form = RecipeForm(instance=recipe)
 
     return render(request, 'groceries_app/recipe_form.html', {'form': form, 'recipe': recipe})
+
+
+
 

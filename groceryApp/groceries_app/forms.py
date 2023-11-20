@@ -1,6 +1,7 @@
 from django.forms import ModelForm
+from django.contrib.auth.forms import UserCreationForm
 from django.forms import forms, ModelMultipleChoiceField, CheckboxSelectMultiple, SelectMultiple
-from .models import GroceryItem, Recipe, RecipeList
+from .models import GroceryItem, Recipe, RecipeList, User
 from django.forms.formsets import formset_factory
 
 
@@ -49,3 +50,8 @@ class RecipeListForm(ModelForm):
         fields = ('list_name', 'recipes', 'search_lowest_cost', 'preferred_store')
 
 
+
+class UserRegistrationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
