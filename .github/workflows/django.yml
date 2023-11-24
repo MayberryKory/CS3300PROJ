@@ -26,10 +26,11 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Install Chrome and ChromeDriver
+    - name: Remove existing Chromedriver
+      run: sudo rm /usr/local/bin/chromedriver || true
+
+    - name: Download and Install compatible Chromedriver
       run: |
-        sudo apt-get update
-        sudo apt-get install -y google-chrome-stable
         LATEST_CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
         wget "https://chromedriver.storage.googleapis.com/${LATEST_CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
         unzip chromedriver_linux64.zip
