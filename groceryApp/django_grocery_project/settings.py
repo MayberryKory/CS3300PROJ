@@ -142,5 +142,5 @@ BOOTSTRAP5 = {
     'theme_url': 'https://cdn.jsdelivr.net/npm/bootstrap@5.5.3/dist/css/bootstrap.min.css',
     'javascript_url': 'https://cdn.jsdelivr.net/npm/bootstrap@5.5.3/dist/js/bootstrap.bundle.min.js',
 }
-
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
