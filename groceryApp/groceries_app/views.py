@@ -5,7 +5,9 @@ from django.http import HttpResponse
 from .models import *
 from .forms import *
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout as auth_logout
+from django.contrib import messages
 from django.urls import reverse_lazy
 
 
@@ -41,6 +43,8 @@ class RecipeListDetailView(generic.DetailView):
 class LoginView(auth_views.LoginView):
     template_name = 'login.html'
     success_url = reverse_lazy('index')
+    authentication_form = AuthenticationForm
+    
 
 # Logout
 def logut(request):
@@ -83,6 +87,7 @@ def createRecipe(request):
     context = {'form': form}
     return render(request, 'groceries_app/recipe_form.html', context)
 
+@login_required
 def deleteRecipe(request, recipe_id):
     
     recipe = Recipe.objects.get(pk=recipe_id)
@@ -94,6 +99,7 @@ def deleteRecipe(request, recipe_id):
 
     return render(request, 'groceries_app/project_delete.html', {'recipe': recipe})
 
+@login_required
 def updateRecipe(request, recipe_id):
     # Retrieve the existing recipe
     recipe = Recipe.objects.get(pk=recipe_id)
