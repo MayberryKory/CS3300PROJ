@@ -27,5 +27,4 @@ jobs:
         pip install -r groceryApp/requirements.txt
     - name: Run Tests
       run: |
-        cd CS3300PROJ/groceryApp
-        python manage.py test
+        python groceryApp/manage.py test
