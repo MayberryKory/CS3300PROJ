@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Set up Virtual Environment
       run: |
-        source djvenv/bin/activate
+        source groceryApp/djvenv/bin/activate
       
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
