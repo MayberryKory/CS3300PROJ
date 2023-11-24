@@ -10,8 +10,8 @@
         <thead>
             <tr>
                 <th>Recipe Name</th>
-                <th>Other Header 1</th>
-                <th>Other Header 2</th>
+                <th>Created By</th>
+                <th>Last Updated On</th>
                 <!-- Add more headers as needed -->
             </tr>
         </thead>
@@ -21,8 +21,12 @@
                     <td>
                         <a href="{{ recipe.get_absolute_url }}">{{ recipe.recipe_name }}</a>
                     </td>
-                    <td>{{ recipe.other_field_1 }}</td>
-                    <td>{{ recipe.other_field_2 }}</td>
+                    <td>
+                        {{ recipe.creator}}
+                    </td>
+                    <td>
+                        {{ recipe.date_modified|date:"F j, Y, P" }}
+                    </td>
                     <!-- Add more data fields as needed -->
                 </tr>
             {% endfor %}
