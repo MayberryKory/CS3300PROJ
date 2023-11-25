@@ -1,7 +1,8 @@
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from .serializer import GrocerySerializer
 from .models import *
 from .forms import *
 from django.contrib.auth import views as auth_views
@@ -9,20 +10,45 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout as auth_logout
 from django.contrib import messages
 from django.urls import reverse_lazy
-
+from .api_interfaces import *
+import base64
 
 
 # Create your views here.
 def index(request):
     return render(request, 'groceries_app/index.html')
 
+def get_grocery_items(request):
+    client_id = "shopnest-c3f6a3ac62a8ec4c7a93f6c9aa42d1658272743587919993717"
+    client_secret = "4yBG7MpD4bYi1imSjMkZQo-I9xsyTSStSlySV4Df"
+    # Encoding client_id and client_secret separately
+    encoded_id = base64.b64encode(client_id.encode('ascii')).decode('ascii')
+    encoded_secret = base64.b64encode(client_secret.encode('ascii')).decode('ascii')
+    # Generating the API token
+   
+    api_token = "Q0xJRU5UX0lEOkNMSUVOVF9TRUNSRVQ="    #f"{encoded_id}:{encoded_secret}"
+    print("API Token: " + str(api_token))
+    get_client_access(api_token)
+    brand = 'Kraft'  # Replace with the desired brand
+    term = 'Macaroni and Cheese'  # Replace with the search term
+    location_id = '01400943'  # Replace with the location ID
+    
+    kroger_products = get_kroger_products(api_token, brand, term, location_id)
+    print(kroger_products.data)
+    
+    # Process the data or pass it to the template
+    context = {'kroger_products': kroger_products}
+    return render(request, 'groceries_app/groceryitem_list.html', context)
+
+    
 class GroceryItemListView(generic.ListView):
     model = GroceryItem
-    context_object_name = "grocery_item_list"
+    context_object_name="grocery_item_list"
 
 class GroceryItemDetailView(generic.DetailView):
     model = GroceryItem
     context_object_name ="grocery_item"
+
 class RecipeView(generic.ListView):
     model = Recipe
 

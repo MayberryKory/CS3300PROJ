@@ -4,6 +4,7 @@ from groceries_app import views
 
 urlpatterns = [
     path('', views.index, name="index"),
+    path('testItems/', views.get_grocery_items, name = 'api-grocery-items'),
     path('groceryItems/', views.GroceryItemListView.as_view(), name= 'grocery-items'),
     path('groceryItems/<int:pk>', views.GroceryItemDetailView.as_view(), name='item-detail'),
     path('recipes/', views.RecipeView.as_view(), name= 'recipes'),
