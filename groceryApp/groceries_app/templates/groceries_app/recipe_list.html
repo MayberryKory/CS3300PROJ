@@ -33,12 +33,13 @@
         </tbody>
     </table>
 
-    <div class="new-recipe-button-container">
-        <a href="{% url 'create-recipe' %}" class="btn btn-primary">Create New Recipe</a>
-    </div>
+    
 {% else %}
     <p>There are no recipes to view.</p>
 {% endif %}
+<div class="new-recipe-button-container">
+    <a href="{% url 'create-recipe' %}" class="btn btn-primary">Create New Recipe</a>
+</div>
 </div>
 
 <style>
